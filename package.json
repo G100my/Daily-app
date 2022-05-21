@@ -31,6 +31,7 @@
     "jsdom": "^19.0.0",
     "prettier": "^2.5.1",
     "start-server-and-test": "^1.14.0",
+    "unplugin-auto-import": "^0.7.2",
     "unplugin-vue-components": "^0.19.5",
     "vite": "^2.9.5",
     "vite-plugin-pages": "^0.23.0",
