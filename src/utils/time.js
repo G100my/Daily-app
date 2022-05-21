@@ -73,6 +73,18 @@ export default class Time {
     return { hour, min, mins, isNegative };
   }
 
+  // ? more kind of input type ?
+  /**
+   *
+   * @param {string | number} start
+   * @param {string | number} end
+   * @returns {number} mins
+   */
+  static getMinsBetween(start, end) {
+    if (!start || !end) throw new Error("start, end can't be undefined.");
+    return Time.parse(end).mins - Time.parse(start).mins;
+  }
+
   // #hour;
   // #min;
 
@@ -99,6 +111,20 @@ export default class Time {
       return new Time(this.getMins() + any.getMins());
     } else if (typeof any === 'string' || typeof any === 'number' || typeof any === 'object') {
       return new Time(this.getMins() + Time.parse(any).mins);
+    } else {
+      throw new TimeError(`plus - param in invalid, ${typeof any} ${any}`);
+    }
+  }
+  // ? refactor me ?
+  /**
+   * @any {Time | string | number | {min:number,hour:number}} any
+   * @returns
+   */
+  minus(any) {
+    if (any instanceof Time) {
+      return new Time(this.getMins() - any.getMins());
+    } else if (typeof any === 'string' || typeof any === 'number' || typeof any === 'object') {
+      return new Time(this.getMins() - Time.parse(any).mins);
     } else {
       throw new TimeError(`plus - param in invalid, ${typeof any} ${any}`);
     }

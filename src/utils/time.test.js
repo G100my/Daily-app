@@ -165,6 +165,17 @@ describe('method - strange input', () => {
   });
 });
 
+describe('static - getMinsBetween', () => {
+  test.each([
+    ['02:00', '10:20', '08:20'],
+    ['02:40', '10:20', '07:40'],
+    ['10:00', '02:20', '-07:40'],
+    ['02:20', '02:20', '00:00'],
+  ])(`%s -> %s =`, (start, end, expected) => {
+    expect(Time.getMinsBetween(start, end)).toBe(Time.parse(expected).mins);
+  });
+});
+
 // describe.only('', () => {
 //   test('', () => {
 //     const result = new Time('00:00').plus({ min: 30 })
