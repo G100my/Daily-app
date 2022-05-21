@@ -1,6 +1,6 @@
-import { createI18n } from 'vue-i18n'
-import enUS from './en-US.json'
-import zhTW from './zh-TW.json'
+import { createI18n } from 'vue-i18n';
+import enUS from './en-US.json';
+import zhTW from './zh-TW.json';
 
 export default createI18n({
   locale: 'en-US',
@@ -11,4 +11,4 @@ export default createI18n({
     'en-US': enUS,
     'zh-TW': zhTW,
   },
-})
+});
