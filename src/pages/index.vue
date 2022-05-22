@@ -1,10 +1,11 @@
+<script setup></script>
 <template>
-  <div>
+  <div class="h:100vh d:flex flex:col">
     <header>
       <h1>{{ $t('base.project_name') }}</h1>
     </header>
-    <main>
-      <!--  -->
+    <main class="flex:1 overflow-y:auto">
+      <TimelineBoard class="h:full" />
     </main>
     <footer>
       <nav>
