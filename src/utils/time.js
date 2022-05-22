@@ -20,7 +20,7 @@ export default class Time {
   static parse(any) {
     let hour = 0,
       min = 0,
-      mins = 0,
+      duration = 0,
       isNegative = false;
     switch (typeof any) {
       case 'undefined':
@@ -34,7 +34,7 @@ export default class Time {
         isNegative = any.startsWith('-');
         [hour, min] = any.split(':').map(i => Number(i));
         if (isNegative) min *= -1;
-        mins = hour * 60 + min;
+        duration = hour * 60 + min;
         break;
       case 'object':
         var arr = Object.keys(any);
@@ -43,34 +43,34 @@ export default class Time {
           if (typeof any[i] !== 'number' || isNaN(any[i])) throw new TimeError(`[parse]: param.${i} is invaild or NaN`);
           switch (i) {
             case 'min':
-              mins += any.min;
+              duration += any.min;
               break;
             case 'hour':
-              mins += any.hour * 60;
+              duration += any.hour * 60;
               break;
 
             default:
               throw new TimeError(`[parse]: invalid param property: ${i}`);
           }
         });
-        isNegative = mins < 0;
+        isNegative = duration < 0;
         break;
       case 'number':
         if (isNaN(any)) {
           throw new TimeError(`[parse]: ${typeof any} ${any}`);
         }
-        mins = any;
-        isNegative = mins < 0;
+        duration = any;
+        isNegative = duration < 0;
         break;
       default:
         throw new TimeError(`[parse]:  ${typeof any} ${any}`);
     }
 
-    min = mins % 60;
+    min = duration % 60;
 
-    hour = isNegative ? Math.ceil(mins / 60) : Math.floor(mins / 60);
+    hour = isNegative ? Math.ceil(duration / 60) : Math.floor(duration / 60);
 
-    return { hour, min, mins, isNegative };
+    return { hour, min, duration, isNegative };
   }
 
   // ? more kind of input type ?
@@ -94,10 +94,10 @@ export default class Time {
    * @returns
    */
   constructor(time) {
-    const { hour: _hour, min: _min, mins: _mins, isNegative } = Time.parse(time);
+    const { hour: _hour, min: _min, duration: _duration, isNegative } = Time.parse(time);
     this.getHour = () => _hour;
     this.getMin = () => _min;
-    this.getMins = () => _mins;
+    this.getDuration = () => _duration;
     this.isNegative = () => isNegative;
     this.getString = () => (isNegative ? '-' : '') + addZero(_hour) + ':' + addZero(_min);
   }
@@ -108,9 +108,9 @@ export default class Time {
    */
   plus(any) {
     if (any instanceof Time) {
-      return new Time(this.getMins() + any.getMins());
+      return new Time(this.getDuration() + any.getDuration());
     } else if (typeof any === 'string' || typeof any === 'number' || typeof any === 'object') {
-      return new Time(this.getMins() + Time.parse(any).mins);
+      return new Time(this.getDuration() + Time.parse(any).duration);
     } else {
       throw new TimeError(`plus - param in invalid, ${typeof any} ${any}`);
     }
@@ -122,9 +122,9 @@ export default class Time {
    */
   minus(any) {
     if (any instanceof Time) {
-      return new Time(this.getMins() - any.getMins());
+      return new Time(this.getDuration() - any.getDuration());
     } else if (typeof any === 'string' || typeof any === 'number' || typeof any === 'object') {
-      return new Time(this.getMins() - Time.parse(any).mins);
+      return new Time(this.getDuration() - Time.parse(any).duration);
     } else {
       throw new TimeError(`plus - param in invalid, ${typeof any} ${any}`);
     }
