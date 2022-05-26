@@ -19,7 +19,7 @@ const props = defineProps({
   },
 });
 
-const timelineAmount = computed(() => Math.floor(Time.getDurationBetween(props.start, props.end) / props.timeGap));
+const timelineAmount = computed(() => Math.floor(Time.getMinsBetween(props.start, props.end) / props.timeGap));
 const timelineLabel = computed(() =>
   Array(timelineAmount.value)
     .fill(null)

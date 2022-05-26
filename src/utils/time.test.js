@@ -23,7 +23,7 @@ describe('init', () => {
     expect(() => new Time()).not.toThrow();
     const t = new Time();
     expect(t.getString()).toBe('00:00');
-    expect(t.getDuration()).toBe(0);
+    expect(t.getMins()).toBe(0);
     expect(t.isNegative()).toBeFalsy();
   });
 
@@ -35,15 +35,15 @@ describe('init', () => {
     ['-00:00', true, -0, -0, -0, '-00:00'],
     ['00:00', false, 0, 0, 0, '00:00'],
   ])(
-    'string: %s -> isNegative: %s, hour: %s, min: %s, duration: %s, output: %s',
-    (params, isNegative, hour, min, duration, outputStr) => {
+    'string: %s -> isNegative: %s, hour: %s, min: %s, mins: %s, output: %s',
+    (params, isNegative, hour, min, mins, outputStr) => {
       expect(() => new Time(params)).not.toThrow();
       const t = new Time(params);
       expect(t.getString()).toBe(outputStr);
       expect(t.isNegative()).toBe(isNegative);
       expect(t.getHour()).toBe(hour);
       expect(t.getMin()).toBe(min);
-      expect(t.getDuration()).toBe(duration);
+      expect(t.getMins()).toBe(mins);
     },
   );
 
@@ -54,15 +54,15 @@ describe('init', () => {
     [200, false, 3, 20, 200, '03:20'],
     [-200, true, -3, -20, -200, '-03:20'],
   ])(
-    'number: %s -> isNegative: %s, hour: %s, min: %s, duration: %s, output: %s',
-    (params, isNegative, hour, min, duration, outputStr) => {
+    'number: %s -> isNegative: %s, hour: %s, min: %s, mins: %s, output: %s',
+    (params, isNegative, hour, min, mins, outputStr) => {
       expect(() => new Time(params)).not.toThrow();
       const t = new Time(params);
       expect(t.getString()).toBe(outputStr);
       expect(t.isNegative()).toBe(isNegative);
       expect(t.getHour()).toBe(hour);
       expect(t.getMin()).toBe(min);
-      expect(t.getDuration()).toBe(duration);
+      expect(t.getMins()).toBe(mins);
     },
   );
 
@@ -85,7 +85,7 @@ describe('init', () => {
     expect(time.getHour()).toBe(1);
     expect(time.getMin()).toBe(12);
     expect(time.getString()).toBe('01:12');
-    expect(time.getDuration()).toBe(72);
+    expect(time.getMins()).toBe(72);
   });
 
   test('getters, 00:00', () => {
@@ -93,7 +93,7 @@ describe('init', () => {
     expect(time.getHour()).toBe(0);
     expect(time.getMin()).toBe(0);
     expect(time.getString()).toBe('00:00');
-    expect(time.getDuration()).toBe(0);
+    expect(time.getMins()).toBe(0);
   });
 
   test('getters, 99:99', () => {
@@ -101,7 +101,7 @@ describe('init', () => {
     expect(time.getHour()).toBe(100);
     expect(time.getMin()).toBe(39);
     expect(time.getString()).toBe('100:39');
-    expect(time.getDuration()).toBe(6039);
+    expect(time.getMins()).toBe(6039);
   });
 });
 
@@ -165,14 +165,14 @@ describe('method - strange input', () => {
   });
 });
 
-describe('static - getDurationBetween', () => {
+describe('static - getMinsBetween', () => {
   test.each([
     ['02:00', '10:20', '08:20'],
     ['02:40', '10:20', '07:40'],
     ['10:00', '02:20', '-07:40'],
     ['02:20', '02:20', '00:00'],
   ])(`%s -> %s =`, (start, end, expected) => {
-    expect(Time.getDurationBetween(start, end)).toBe(Time.parse(expected).duration);
+    expect(Time.getMinsBetween(start, end)).toBe(Time.parse(expected).mins);
   });
 });
 
