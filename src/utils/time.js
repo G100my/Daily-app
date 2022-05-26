@@ -85,6 +85,31 @@ export default class Time {
     return Time.parse(end).mins - Time.parse(start).mins;
   }
 
+  /**
+   * determine which time is the latter one.
+   * @param {string | number} time1
+   * @param {string | number} time2
+   * @param {*} range
+   * @returns 1: first one, -1: second one, 0: equal
+   */
+  static judgeTheLatestInDay(time1, time2, range) {
+    if (!time1 || !time2) throw new Error("time1, time2 can't be undefined.");
+    if (!range) range = { start: '00:00', end: '24:00' };
+    const rangeStartMins = this.parse(range.start).mins;
+    const rangeEndMins = this.parse(range.end).mins;
+    const offset = this.getDurationBetween(range.start, '24:00');
+    let time1Mins = this.parse(time1).mins;
+    let time2Mins = this.parse(time2).mins;
+    if (rangeStartMins > rangeEndMins) {
+      if (time1Mins < rangeStartMins) time1Mins += offset;
+      if (time2Mins < rangeStartMins) time2Mins += offset;
+    }
+    const result = time1Mins - time2Mins;
+    if (result > 0) return 1;
+    else if (result < 0) return -1;
+    return null;
+  }
+
   // #hour;
   // #min;
 
