@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import Time from '@/utils/time.js';
 
 const props = defineProps({

@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import { useTaskStore } from './stores/useTaskStore';
 import { localKey } from './utils/constant';
 
