@@ -1,44 +1,52 @@
 import { defineStore } from 'pinia';
-/**
- * @typedef Task
- * @property {string} title Task name
- * @property {string|number|object} start Time
- * @property {number} duration
- * @property {string} baseOn element id
- * @property {{ top:number, bottom:number, left:number, right:number}} position
- * @property {number} priority 0,1,2,3
- */
 
-/**
- * @typedef DailySchedule
- * @property {string} display
- * @property {string} start
- * @property {string} end
- * @property {Task[]} list
- */
+export interface Position {
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+}
+export interface Task {
+  title: string;
+  start: string;
+  duration: number;
+  baseOn: string;
+  position: Position;
+}
 
-/**
- * @typedef {'mon'|'tue'|'wed'|'thu'|'fri'|'sat'|'sun'} DayOfWeek
- */
+export interface DailySchedule {
+  display: string;
+  start: string;
+  end: string;
+  list: Task[];
+}
 
-/** @typedef { import('../utils/constant')} */
+export enum DayEnum {
+  MON = 'mon',
+  TUE = 'tue',
+  WED = 'wed',
+  THU = 'thu',
+  FRI = 'fri',
+  SAT = 'sat',
+  SUN = 'sun',
+}
+export type DayOfWeek = `${DayEnum}`;
 
-/** @type {Array.<DayOfWeek>} */
-const daysOfWeek = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const daysOfWeek = Object.values(DayEnum);
 
 export const useTaskStore = defineStore('task', {
   state: () => {
+    const weeklySchedule: { [key: DayEnum]: DailySchedule } = daysOfWeek.reduce((acc, i) => {
+      acc[i] = {
+        display: 'mon',
+        start: '17:00',
+        end: '23:00',
+        list: [],
+      };
+      return acc;
+    }, {});
     return {
-      /** @type {{mon: DailySchedule, tue: DailySchedule, wed: DailySchedule, thu: DailySchedule, fri: DailySchedule, sat: DailySchedule, sun: DailySchedule, }} */
-      weeklySchedule: daysOfWeek.reduce((acc, i) => {
-        acc[i] = {
-          display: 'mon',
-          start: '17:00',
-          end: '23:00',
-          list: [],
-        };
-        return acc;
-      }, {}),
+      weeklySchedule,
       dailyList: [],
     };
   },
