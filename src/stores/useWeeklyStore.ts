@@ -1,10 +1,11 @@
+import { DayEnum, type DailySchedule } from '@/constant';
 import { defineStore } from 'pinia';
 
 const daysOfWeek = Object.values(DayEnum);
 
 export const useWeeklyStore = defineStore('WeeklyStore', {
   state: () => {
-    const weeklySchedule: { [key: DayEnum]: DailySchedule } = daysOfWeek.reduce((acc, i) => {
+    const weeklySchedule: { [key in DayEnum]: DailySchedule } = daysOfWeek.reduce((acc, i) => {
       acc[i] = {
         display: 'mon',
         start: '17:00',
@@ -12,7 +13,7 @@ export const useWeeklyStore = defineStore('WeeklyStore', {
         list: [],
       };
       return acc;
-    }, {});
+    }, {} as { [key in DayEnum]: DailySchedule });
     return {
       weeklySchedule,
     };
