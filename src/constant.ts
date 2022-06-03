@@ -9,11 +9,10 @@ export interface Position {
   right: number;
 }
 export interface Task {
-  taskID: string;
+  taskID: number;
   title: string;
   start: string;
   duration: number;
-  baseOn: string;
   position: Position;
 }
 

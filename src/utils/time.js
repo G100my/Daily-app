@@ -107,7 +107,7 @@ export default class Time {
     if (!range) range = { start: '00:00', end: '24:00' };
     const rangeStartMins = this.parse(range.start).mins;
     const rangeEndMins = this.parse(range.end).mins;
-    const offset = this.getDurationBetween(range.start, '24:00');
+    const offset = this.getMinsBetween(range.start, '24:00');
     let time1Mins = this.parse(time1).mins;
     let time2Mins = this.parse(time2).mins;
     if (rangeStartMins > rangeEndMins) {
