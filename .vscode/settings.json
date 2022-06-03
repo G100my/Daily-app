@@ -1,0 +1,13 @@
+{
+  "typescript.autoClosingTags": false,
+  "typescript.validate.enable": false,
+  "i18n-ally.localesPaths": [
+    "src/locales"
+  ],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.displayLanguage": "zh-TW",
+  "i18n-ally.extract.autoDetect": true,
+  "typescript.format.enable": false,
+  "typescript.format.insertSpaceAfterCommaDelimiter": true,
+  "typescript.suggestionActions.enabled": false
+}
