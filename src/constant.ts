@@ -9,6 +9,7 @@ export interface Position {
   right: number;
 }
 export interface Task {
+  taskID: string;
   title: string;
   start: string;
   duration: number;
@@ -17,7 +18,7 @@ export interface Task {
 }
 
 export interface DailySchedule {
-  display: string;
+  displayName: string;
   start: string;
   end: string;
   list: Task[];
