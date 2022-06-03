@@ -34,7 +34,7 @@ export type DayOfWeek = `${DayEnum}`;
 
 const daysOfWeek = Object.values(DayEnum);
 
-export const useTaskStore = defineStore('task', {
+export const useWeeklyStore = defineStore('WeeklyStore', {
   state: () => {
     const weeklySchedule: { [key: DayEnum]: DailySchedule } = daysOfWeek.reduce((acc, i) => {
       acc[i] = {
@@ -47,7 +47,6 @@ export const useTaskStore = defineStore('task', {
     }, {});
     return {
       weeklySchedule,
-      dailyList: [],
     };
   },
   getters: {
