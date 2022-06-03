@@ -1,3 +1,14 @@
+/**
+ * @typedef {Object} TimeBase
+ * @property {number} min
+ * @property {number} hour
+ */
+
+/**
+ * @typedef {Object} Range
+ * @property {string} start '00:00'
+ * @property {string} end '00:00'
+ */
 const timeFormat = /^-\d{2,}:\d{2}$|^\d{2,}:\d{2}$/;
 
 class TimeError extends Error {
@@ -13,8 +24,7 @@ function addZero(num) {
 
 export default class Time {
   /**
-   *
-   * @param {undefined | string | number} any
+   * @param {undefined | string | number | TimeBase} any
    * @returns
    */
   static parse(any) {
@@ -89,7 +99,7 @@ export default class Time {
    * determine which time is the latter one.
    * @param {string | number} time1
    * @param {string | number} time2
-   * @param {*} range
+   * @param {Range} range
    * @returns 1: first one, -1: second one, 0: equal
    */
   static judgeTheLatestInDay(time1, time2, range) {
@@ -128,7 +138,7 @@ export default class Time {
   }
 
   /**
-   * @any {Time | string | number | {min:number,hour:number}} any
+   * @param {Time | string | number | TimeBase} any
    * @returns
    */
   plus(any) {
@@ -142,7 +152,7 @@ export default class Time {
   }
   // ? refactor me ?
   /**
-   * @any {Time | string | number | {min:number,hour:number}} any
+   * @param {Time | string | number | TimeBase} any
    * @returns
    */
   minus(any) {
