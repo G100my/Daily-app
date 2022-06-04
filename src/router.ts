@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import pages from '~pages';
 
-const tmp = [];
-function findChildren(route) {
+const tmp: RouteRecordRaw[] = [];
+function findChildren(route: RouteRecordRaw) {
   if (route.children?.length) {
-    route.children.forEach(child => {
+    route.children.forEach((child: RouteRecordRaw) => {
       findChildren(child);
       if (child.name) tmp.push(child);
     });
