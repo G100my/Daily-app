@@ -1,4 +1,12 @@
 {
+  "add_task": {
+    "dialog_title": "新增任務...",
+    "duration": "持續時間",
+    "range_half_hour": "半小時",
+    "range_helf_hour": "半小時",
+    "range_min": "分鐘",
+    "title": "任務名稱"
+  },
   "base": {
     "project_name": "日常"
   }

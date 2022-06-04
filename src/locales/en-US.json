@@ -1,4 +1,12 @@
 {
+  "add_task": {
+    "dialog_title": "Add new Task...",
+    "duration": "",
+    "range_half_hour": "",
+    "range_helf_hour": "",
+    "range_min": "",
+    "title": "Task Title"
+  },
   "base": {
     "project_name": "Daily"
   }

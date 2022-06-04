@@ -1,6 +1,6 @@
 <script lang="ts" setup></script>
 <template>
-  <div class="h:100vh d:flex flex:col">
+  <div class="h:full d:flex flex:col">
     <header>
       <h1>{{ $t('base.project_name') }}</h1>
     </header>
