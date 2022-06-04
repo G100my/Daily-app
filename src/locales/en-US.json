@@ -1,13 +1,21 @@
 {
   "add_task": {
+    "add": "Add",
     "dialog_title": "Add new Task...",
-    "duration": "",
-    "range_half_hour": "",
+    "duration": "Duration",
+    "minimum_time_unit": "Minimum time unit",
+    "range_half_hour": "half an hour",
     "range_helf_hour": "",
-    "range_min": "",
-    "title": "Task Title"
+    "range_min": "minute",
+    "start_time": "Start at",
+    "title": "Task Title",
+    "unit_hour": "hour",
+    "unit_min": "minute"
   },
   "base": {
     "project_name": "Daily"
+  },
+  "footer": {
+    "weekly": "Add"
   }
 }
